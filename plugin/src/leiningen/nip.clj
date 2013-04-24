@@ -1,15 +1,15 @@
-(ns leiningen.edit
+(ns leiningen.nip
   (:require [leinjacker.eval :as eval]
             [leinjacker.deps :as deps])
   (:import [java.util.concurrent CountDownLatch]
            [java.net ServerSocket]))
 
 (defn- with-catnip-dep [project]
-  (deps/add-if-missing project '[catnip "0.5.1"]))
+  (deps/add-if-missing project '[catnip "0.6.0-SNAPSHOT"]))
 
 (defn- start-server-form [port]
   `(let [url# (str (catnip.server/start ~port))]
-     (println "Catnip running on" url#)
+     (println "Catnip SNAPSHOT running on" url#)
      (clojure.java.browse/browse-url url#)))
 
 (defn- server-in-project [project port]
@@ -28,8 +28,8 @@
         (if (pos? port) port
             (free-port)))))
 
-(defn edit
-  "Launch a Catnip server."
+(defn nip
+  "Launch a Catnip experimental server."
   [project & [port]]
   (server-in-project (with-catnip-dep project) (select-port port))
   (.await (CountDownLatch. 1)))

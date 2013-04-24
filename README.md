@@ -34,6 +34,10 @@ To install Catnip, add the plugin to your
     {:user {:plugins [[lein-catnip "0.5.1"]]}}
 ```
 
+### Build and install
+
+To build and run your own Catnip, while retaining the stable version, first follow the manual installation instructions. Then clone the repo and run "lein install", first in the /catnip directory, then in the /plugin directory. This will add a second task, "lein nip", that will run your local snapshot. Re-install the main project after making changes for them to go into effect. 
+
 ## Usage
 
 ### Quickstart
